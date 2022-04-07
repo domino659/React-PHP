@@ -2,19 +2,21 @@ import ReactReact, { useState } from "react"
 import { Buffer } from "buffer"
 
 export default function Login() {
-  const [user, setUser] = useState("false")
-  const [password, setPassword] = useState("false")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleSubmit = () => {
-    const credentials = Buffer.from(user + ":" + password).toString("base64")
+    const credentials = Buffer.from(username + ":" + password).toString(
+      "base64"
+    )
 
     const headers = new Headers({
       "Authorization": `Basic ${credentials}`,
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-type": "application/x-www-form-urlencoded"
     })
 
     const data = new URLSearchParams({
-      user: user
+      user: username
     })
 
     fetch("http://localhost:2345", {
@@ -28,6 +30,7 @@ export default function Login() {
       .then(dataPost => {
         console.log(dataPost)
       })
+      .catch(error => console.log("Authorization failed : " + error.message))
   }
 
   return (
@@ -37,8 +40,8 @@ export default function Login() {
           type="text"
           className="search-bar"
           placeholder="Username"
-          value={user}
-          onChange={e => setUser(e.target.value)}
+          value={username}
+          onChange={e => setUsername(e.target.value)}
           required
         ></input>
         <input
