@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "montseratt", sans-serif;
+}
+
+.search-box {
+    width: 100%;
+    margin: 0 0 75px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+.search-box .search-bar, .submit {
+width: 40%;
+padding: 15px;
+
+appearance: none;
+background: none;
+border: none;
+outline: none;
+
+background-color: rgba(255, 255, 255, 0.5);
+border-radius: 0px 0px 0px 0px;
+border: 1px solid;
+
+color: #313131;
+font-size: 20px;
+
+transition: 0.4s ease;
+}
+
+.search-box .search-bar:hover, .search-box .submit:hover {
+background-color: rgba(255, 255, 255, 0.75);
+}
+
+.search-box .submit {
+    width: 20%;
+    background-color: rgba(220, 220, 220, 0.5);
+
+    cursor: pointer
+}
