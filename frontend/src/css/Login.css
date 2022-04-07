@@ -15,7 +15,7 @@ body {
     flex-direction: column;
   }
   
-.search-box .search-bar, .submit {
+.search-box .search-bar, .submitButton {
 width: 40%;
 padding: 15px;
 
@@ -34,11 +34,11 @@ font-size: 20px;
 transition: 0.4s ease;
 }
 
-.search-box .search-bar:hover, .search-box .submit:hover {
+.search-box .search-bar:hover, .search-box .submitButton:hover {
 background-color: rgba(255, 255, 255, 0.75);
 }
 
-.search-box .submit {
+.search-box .submitButton {
     width: 20%;
     background-color: rgba(220, 220, 220, 0.5);
 

@@ -6,11 +6,12 @@ header('Access-Control-Allow-Headers: authorization');
 
 // var_dump(getallheaders());
 
-// echo json_encode([
-//     'message' => $_POST
-// ]);
-
 echo json_encode([
-    'username' => $_SERVER['PHP_AUTH_USER'],
-    'password' => $_SERVER['PHP_AUTH_PW']
+    'message' => $_SERVER,
+    // 'message' => $_POST
 ]);
+
+// echo json_encode([
+//     'username' => $_SERVER['PHP_AUTH_USER'],
+//     'password' => $_SERVER['PHP_AUTH_PW']
+// ]);
