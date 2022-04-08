@@ -5,8 +5,6 @@ export default function Login() {
   const [action] = useState("login")
   const [mail, setMail] = useState("martin@sionfamily.com")
   const [password, setPassword] = useState("domino")
-  const [cookieJar, fillCookieJar] = useState("")
-  const [token, changeToken] = useState("")
 
   const handleSubmit = () => {
     const credentials = Buffer.from(mail + ":" + password).toString("base64")
@@ -30,9 +28,6 @@ export default function Login() {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        changeToken(data.answer.username)
-        console.log(token)
-        fillCookieJar(data.COOKIE[token])
       })
       .catch(error => console.log("Authorization failed : " + error.message))
   }
@@ -63,8 +58,7 @@ export default function Login() {
           onClick={handleSubmit}
         />
       </form>
-      <div>Hello {token}</div>
-      <div>Miam miam here is my {cookieJar}</div>
+      <div>Miam miam here is my {document.cookie}</div>
     </div>
   )
 }

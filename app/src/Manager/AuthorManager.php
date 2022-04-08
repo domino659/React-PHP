@@ -83,9 +83,9 @@ class AuthorManager extends BaseManager
         return $prepare->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public static function getCookie($id)
+    public static function getToken($id)
     {
-        $requeteSql = "SELECT cookie FROM author WHERE id = :id";
+        $requeteSql = "SELECT token FROM author WHERE id = :id";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindvalue(':id', $id, \PDO::PARAM_STR);
