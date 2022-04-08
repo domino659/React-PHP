@@ -74,7 +74,7 @@ class AuthorManager extends BaseManager
 
     public static function userLogin($email)
     {
-        $requeteSql = "SELECT email, password FROM author WHERE email = :email";
+        $requeteSql = "SELECT id, username, email, password FROM author WHERE email = :email";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
@@ -83,13 +83,13 @@ class AuthorManager extends BaseManager
         return $prepare->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public static function getCookie($email)
+    public static function getCookie($id)
     {
-        $requeteSql = "SELECT cookie FROM author WHERE email = :email";
+        $requeteSql = "SELECT cookie FROM author WHERE id = :id";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
-                $prepare->bindValue(':email', $email, \PDO::PARAM_STR);
+        $prepare->bindvalue(':id', $id, \PDO::PARAM_STR);
+                $prepare->bindValue(':id', $id, \PDO::PARAM_STR);
         $prepare->execute();
         return $prepare->fetch(\PDO::FETCH_ASSOC);
     }

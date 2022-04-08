@@ -121,6 +121,6 @@ class Author
      */
     public function setCookie(string $cookie): void
     {
-        $this->cookie = $cookie;
+        $this->cookie = md5(time() . mt_rand());
     }
 }

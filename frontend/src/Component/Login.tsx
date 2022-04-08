@@ -1,10 +1,11 @@
-import ReactReact, { useState, useEffect } from "react"
+import { useState } from "react"
 import { Buffer } from "buffer"
 
 export default function Login() {
   const [action] = useState("login")
   const [mail, setMail] = useState("martin@sionfamily.com")
   const [password, setPassword] = useState("domino")
+  const [cookieJar, fillCookieJar] = useState("")
   const [token, changeToken] = useState("")
 
   const handleSubmit = () => {
@@ -27,10 +28,11 @@ export default function Login() {
       credentials: "include"
     })
       .then(response => response.json())
-      .then(dataPost => {
-        console.log(dataPost)
-        changeToken(dataPost.answer.email)
+      .then(data => {
+        console.log(data)
+        changeToken(data.answer.username)
         console.log(token)
+        fillCookieJar(data.COOKIE[token])
       })
       .catch(error => console.log("Authorization failed : " + error.message))
   }
@@ -62,6 +64,7 @@ export default function Login() {
         />
       </form>
       <div>Hello {token}</div>
+      <div>Miam miam here is my {cookieJar}</div>
     </div>
   )
 }
