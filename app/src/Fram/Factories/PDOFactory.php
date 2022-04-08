@@ -11,13 +11,13 @@ class PDOFactory
         $host = getenv('HOST');
         $dbname = getenv('DBNAME');
 
-        $dsn = `mysql:host=${host};dbname=${dbname}`;
-        $user = getenv('DATABASE_USER');;
-        $pwd = getenv('DATABASE_PASSWORD');;
+        $dsn = "mysql:host=${host};dbname=${dbname}";
+        $user = getenv('DATABASE_USER');
+        $pwd = getenv('DATABASE_PASSWORD');
         try {
-             return  new PDO($dsn, $user, $pwd);
-         } catch (Exception $e) {
-             die('Erreur : ' . $e->getMessage());
-         }
+            return  new PDO($dsn, $user, $pwd);
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
     }
 }
