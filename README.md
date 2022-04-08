@@ -1,10 +1,15 @@
 # React-PHP
-
-Required
+Required:
 composer
+
+Launch:
+
+_PHP_
+
+> docker-compose up (./)
+
+_React_
 
 > npm install Buffer
 
-Launch
-
-> npm run dev
+> npm run dev (./frontend)
