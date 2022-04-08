@@ -74,7 +74,7 @@ class AuthorManager extends BaseManager
 
     public static function userLogin($email)
     {
-        $requeteSql = "SELECT id, username, email, password FROM author WHERE email = :email";
+        $requeteSql = "SELECT id, username, isAdmin, email, password FROM author WHERE email = :email";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
@@ -83,13 +83,12 @@ class AuthorManager extends BaseManager
         return $prepare->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public static function getToken($id)
+    public static function getToken($username)
     {
-        $requeteSql = "SELECT token FROM author WHERE id = :id";
+        $requeteSql = "SELECT token FROM author WHERE username = :username";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->bindvalue(':id', $id, \PDO::PARAM_STR);
-                $prepare->bindValue(':id', $id, \PDO::PARAM_STR);
+        $prepare->bindvalue(':username', $username, \PDO::PARAM_STR);
         $prepare->execute();
         return $prepare->fetch(\PDO::FETCH_ASSOC);
     }

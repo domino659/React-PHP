@@ -2,9 +2,8 @@ import { useState } from "react"
 import { Buffer } from "buffer"
 
 export default function Login() {
-  const [action] = useState("login")
-  const [mail, setMail] = useState("martin@sionfamily.com")
-  const [password, setPassword] = useState("domino")
+  const [mail, setMail] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleSubmit = () => {
     const credentials = Buffer.from(mail + ":" + password).toString("base64")
@@ -14,14 +13,14 @@ export default function Login() {
       "Content-type": "application/x-www-form-urlencoded"
     })
 
-    const data = new URLSearchParams({
-      action: action
+    const body = new URLSearchParams({
+      action: "login"
     })
 
     fetch("http://localhost:2345", {
       method: "POST",
       headers: headers,
-      body: data,
+      body: body,
       mode: "cors",
       credentials: "include"
     })
@@ -58,7 +57,10 @@ export default function Login() {
           onClick={handleSubmit}
         />
       </form>
-      <div>Miam miam here is my {document.cookie}</div>
+      <h3>Super fonctionnalité, refresh sa page après sa connexion.</h3>
+      <h3>Indice:</h3>
+      <h4>Email: martin@sionfamily.com</h4>
+      <h4>Mdp: domino</h4>
     </div>
   )
 }

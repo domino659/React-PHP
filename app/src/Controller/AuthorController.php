@@ -30,9 +30,15 @@ class AuthorController extends BaseController
         return $author;
     }
 
-    public static function distributeToken($id)
+    public static function distributeToken($username)
     {
-        $token = AuthorManager::getToken($id);
+        $token = AuthorManager::getToken($username);
+        return $token['token'];
+    }
+
+    public static function checkToken($username)
+    {
+        $token = AuthorManager::getToken($username);
         return $token['token'];
     }
     
