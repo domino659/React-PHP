@@ -1,14 +1,14 @@
-import ReactReact, { useState } from "react"
+import ReactReact, { useState, useEffect } from "react"
 import { Buffer } from "buffer"
 
 export default function Login() {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+  const [action] = useState("login")
+  const [mail, setMail] = useState("martin@sionfamily.com")
+  const [password, setPassword] = useState("domino")
+  const [token, changeToken] = useState("")
 
   const handleSubmit = () => {
-    const credentials = Buffer.from(username + ":" + password).toString(
-      "base64"
-    )
+    const credentials = Buffer.from(mail + ":" + password).toString("base64")
 
     const headers = new Headers({
       "Authorization": `Basic ${credentials}`,
@@ -16,7 +16,7 @@ export default function Login() {
     })
 
     const data = new URLSearchParams({
-      user: username
+      action: action
     })
 
     fetch("http://localhost:2345", {
@@ -29,6 +29,8 @@ export default function Login() {
       .then(response => response.json())
       .then(dataPost => {
         console.log(dataPost)
+        changeToken(dataPost.answer.email)
+        console.log(token)
       })
       .catch(error => console.log("Authorization failed : " + error.message))
   }
@@ -39,9 +41,9 @@ export default function Login() {
         <input
           type="text"
           className="search-bar"
-          placeholder="Username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
+          placeholder="Mail"
+          value={mail}
+          onChange={e => setMail(e.target.value)}
           required
         ></input>
         <input
@@ -59,6 +61,7 @@ export default function Login() {
           onClick={handleSubmit}
         />
       </form>
+      <div>Hello {token}</div>
     </div>
   )
 }

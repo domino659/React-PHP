@@ -43,49 +43,16 @@ class AuthorManager extends BaseManager
      * @return Post|bool
      */
 
-    public static function createAuthor($username, $isAdmin, $password, $email)
+    public static function createAuthor($username, $isAdmin, $password, $email, $cookie)
     {
-        $requeteSql = "INSERT INTO author (username, isAdmin, password, email) Values (:username, :isAdmin, :password, :email)";
+        $requeteSql = "INSERT INTO author (username, isAdmin, password, email, cookie) Values (:username, :isAdmin, :password, :email, :cookie)";
         $connexion = new PDOFactory();
         $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
         $prepare->bindValue(':username', $username, \PDO::PARAM_STR);
         $prepare->bindValue(':isAdmin', $isAdmin, \PDO::PARAM_BOOL);
         $prepare->bindValue(':password', $password, \PDO::PARAM_STR);
         $prepare->bindValue(':email', $email, \PDO::PARAM_STR);
-        $prepare->execute();
-        return true;
-    }
-
-    public static function updateAuthor($id, $username, $email)
-    {
-        $requeteSql = "UPDATE author SET username = :username, email = :email  WHERE id = :id";
-        $connexion = new PDOFactory();
-        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
-        $prepare->bindValue(':username', $username, \PDO::PARAM_STR);
-        $prepare->bindValue(':email', $email, \PDO::PARAM_STR);
-        $prepare->execute();
-        return true;
-    }
-
-    public static function updateAuthorPassword($id, $password)
-    {
-        $requeteSql = "UPDATE author SET password = :password  WHERE id = :id";
-        $connexion = new PDOFactory();
-        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
-        $prepare->bindValue(':password', $password, \PDO::PARAM_STR);
-        $prepare->execute();
-        return true;
-    }
-
-    public static function updateAuthoridAdmin($id, $isAdmin)
-    {
-        $requeteSql = "UPDATE author SET isAdmin = :isAdmin  WHERE id = :id";
-        $connexion = new PDOFactory();
-        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
-        $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
-        $prepare->bindValue(':isAdmin', $isAdmin, \PDO::PARAM_BOOL);
+        $prepare->bindValue(':cookie', $cookie, \PDO::PARAM_STR);
         $prepare->execute();
         return true;
     }
@@ -103,5 +70,27 @@ class AuthorManager extends BaseManager
         $prepare->bindValue(':id', $id, \PDO::PARAM_INT);
         $prepare->execute();
         return true;
+    }
+
+    public static function userLogin($email)
+    {
+        $requeteSql = "SELECT email, password FROM author WHERE email = :email";
+        $connexion = new PDOFactory();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
+                $prepare->bindValue(':email', $email, \PDO::PARAM_STR);
+        $prepare->execute();
+        return $prepare->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getCookie($email)
+    {
+        $requeteSql = "SELECT cookie FROM author WHERE email = :email";
+        $connexion = new PDOFactory();
+        $prepare = $connexion->getMysqlConnection()->prepare($requeteSql);
+        $prepare->bindvalue(':email', $email, \PDO::PARAM_STR);
+                $prepare->bindValue(':email', $email, \PDO::PARAM_STR);
+        $prepare->execute();
+        return $prepare->fetch(\PDO::FETCH_ASSOC);
     }
 }

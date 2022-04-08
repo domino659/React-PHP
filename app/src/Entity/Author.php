@@ -12,6 +12,8 @@ class Author
     private bool $isAdmin;
     private string $password;
     private string $email;
+    private string $cookie;
+
 
     public function __construct(array $data){
         $this->hydrate($data);
@@ -104,5 +106,21 @@ class Author
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCookie(): string
+    {
+        return $this->cookie;
+    }
+
+    /**
+     * @param string $cookie
+     */
+    public function setCookie(string $cookie): void
+    {
+        $this->cookie = $cookie;
     }
 }

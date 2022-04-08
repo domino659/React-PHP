@@ -11,7 +11,7 @@ class AuthorController extends BaseController
     /**
      * Show all Authors
      */
-    public function executeGetAuthor()
+    public static function executeGetAuthor()
     {
         $authorsList = AuthorManager::getAllAuthor();
         $authors = [];
@@ -19,5 +19,13 @@ class AuthorController extends BaseController
             $authors[] = (array) $author;
         }
         echo(json_encode($authors));
+    }
+
+    public static function executeUserLogin($email)
+    {
+        $author = AuthorManager::userLogin($email);
+        // echo(json_encode($author));
+        $cookie = AuthorManager::getCookie($email);
+        return $author;
     }
 }
